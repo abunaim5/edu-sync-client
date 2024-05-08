@@ -8,7 +8,7 @@ const BannerItem = ({ item }) => {
                     <h1 className="mb-5 text-5xl font-bold">{item.title}</h1>
                     <p className="mb-5 text-pretty">{item.description}</p>
                     <div className="space-x-6">
-                        <button className="btn bg-[#FFA500] rounded-sm border-none tracking-widest">BECOME A TUTOR</button>
+                        <button className="btn bg-[#FFA500] rounded-sm border-none text-[#0d0d0d] tracking-widest">BECOME A TUTOR</button>
                         <button className="btn rounded-sm bg-transparent border-[#FFA500] hover:bg-transparent text-white tracking-widest">FIND A TUTOR</button>
                     </div>
                 </div>
