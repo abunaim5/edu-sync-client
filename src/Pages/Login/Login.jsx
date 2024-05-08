@@ -1,8 +1,47 @@
 import { Link } from 'react-router-dom';
 import access from '../../assets/access2.svg'
 import { FaGoogle, FaFacebookF, FaTwitter } from "react-icons/fa";
+import { useForm } from 'react-hook-form';
+import useAuth from '../../Hooks/useAuth';
+import Swal from 'sweetalert2';
 
 const Login = () => {
+    const { user, loginUser } = useAuth()
+
+    const {
+        register,
+        handleSubmit,
+        // watch,
+        formState: { errors }
+    } = useForm();
+    const onSubmit = async data => {
+        if(user){
+            return Swal.fire({
+                title: "Error",
+                text: "You are already logged in.",
+                icon: "error"
+            })
+        }
+        
+        const { email, password } = data;
+        try {
+            const result = await loginUser(email, password)
+            result?.user && Swal.fire({
+                title: "Success",
+                text: "Your are logged in successfully",
+                icon: "success"
+            });
+        } catch (error) {
+            error && Swal.fire({
+                title: "Error",
+                text: `${error.message === 'Firebase: Error (auth/invalid-credential).' ? 'Invalid email or password.' : error.message}`,
+                icon: "error"
+            });
+            // console.error(error);
+        }
+        // console.log(data)
+    };
+
     return (
         <div className="hero h-[calc(100vh-66px)]">
             <div className="hero-content flex-col lg:flex-row-reverse gap-20">
@@ -10,19 +49,21 @@ const Login = () => {
                     <img src={access} alt="" />
                 </div>
                 <div className="card shrink-0 max-w-md w-full shadow-lg rounded-sm">
-                    <form className="card-body">
+                    <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                         <h1 className="text-3xl font-bold text-center">Sign In</h1>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Email <span className='text-red-600'>*</span></span>
                             </label>
-                            <input type="email" placeholder="email" className="input input-bordered rounded-sm" required />
+                            <input {...register('email', { required: 'Email address is required.' })} type="email" placeholder="email" className="input input-bordered rounded-sm" />
+                            {errors.email && <p role='alert' className='text-red-600 mt-2'>⚠ {errors.email?.message}</p>}
                         </div>
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-bold">Password <span className='text-red-600'>*</span></span>
                             </label>
-                            <input type="password" placeholder="password" className="input input-bordered rounded-sm" required />
+                            <input {...register('password', { required: 'Password is required.', minLength: { value: 6, message: 'Password must exceed 6 characters.' } })} type="password" placeholder="password" className="input input-bordered rounded-sm" />
+                            {errors.password && <p role='alert' className='text-red-600 mt-2'>⚠ {errors.password?.message}</p>}
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
