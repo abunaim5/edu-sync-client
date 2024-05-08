@@ -1,5 +1,5 @@
-/* google font nunito */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* google font nunito and croissant one */
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,6 +7,10 @@
 
 .font-nunito{
   font-family: "Nunito", sans-serif;
+}
+
+.font-croissant{
+  font-family: "Croissant One", serif;
 }
 
 body{
