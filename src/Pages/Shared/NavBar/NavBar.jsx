@@ -22,7 +22,7 @@ const NavBar = () => {
                 <Link to='/'><button className="text-3xl text-white font-croissant ">TutorSage</button></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1 text-white">
+                <ul className="menu menu-horizontal px-1 text-white font-bold text-xs">
                     {navLinks}
                 </ul>
             </div>
@@ -37,7 +37,7 @@ const NavBar = () => {
                                 <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                             </div>
                         </div>
-                        <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-sm w-52">
+                        <ul tabIndex={0} className="mt-3 z-[10] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-sm w-52">
                             <li>
                                 <a className="justify-between">
                                     Profile
